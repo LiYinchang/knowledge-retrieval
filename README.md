@@ -24,9 +24,9 @@ python query_bot.py
 ```
 
 ## Sample Output
-![Output from GPT4, Openai embedding, and ElasticSearch](pics/GPT4 Model Example.png)
+![Output from GPT4, Openai embedding, and ElasticSearch](pics/GPT4_Example.png)
 
-![Output from Crca-mini, e5 embedding, and ElasticSearch](pics/GPT4 Model Example.png)
+![Output from Orca Mini, e5 embedding, and ElasticSearch](pics/Orca_Mini_Example.png)
 
 
 
