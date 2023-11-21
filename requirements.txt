@@ -1,0 +1,13 @@
+langchain
+faiss-cpu
+datasets
+pypdf
+openai
+chromadb
+langchainhub
+bs4
+ragas
+nemoguardrails
+rank_bm25
+lark
+elasticsearch
