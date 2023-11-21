@@ -60,5 +60,3 @@ class Retriever:
     def get_self_query_retriever(self):
         return self.self_query_retriever
 
-    def get_ensemble_retriever(self):
-        return self.ensemble_retriever
