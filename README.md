@@ -19,7 +19,6 @@ This repository demonstrates the integration of GPT-4, the open-source model Orc
   ```bash
   docker run -p 9200:9200 -e "discovery.type=single-node" -e "xpack.security.enabled=false" -e "xpack.security.http.ssl.enabled=false" docker.elastic.co/elasticsearch/elasticsearch:8.9.0
   ```
-  After setting up Elasticsearch, proceed to ingest data by running `Experiments/knowledge_retrieval_experiment.ipynb`.
 
 - **Open-Source LLM**:
   For using the open-source LLM, install Ollama from [here](https://github.com/jmorganca/ollama).
@@ -29,17 +28,19 @@ This repository demonstrates the integration of GPT-4, the open-source model Orc
    ```bash
    pip install -r requirements.txt
    ```
-2. **Run the Chatbot**:
+2. **Ingest Data**:
    ```bash
-   python query_bot.py 
+   python ingest_data_es.py 
+   ```
+3. **Run Streamlit Chatbot**:
+   ```bash
+   streamlit run streamlit_chatbot.py 
    ```
 
 ## Sample Outputs
-- **GPT-4 with OpenAI Embedding and Elasticsearch**:
-  ![Output from GPT-4, OpenAI embedding, and Elasticsearch](pics/GPT4_Example.png)
+- **Streamlit App Sample Output**:
+  ![Streamlit App Sample Output](pics/streamlit_app.png)
 
-- **Orca Mini with e5 Embedding and Elasticsearch**:
-  ![Output from Orca Mini, e5 embedding, and Elasticsearch](pics/Orca_Mini_Example.png)
 
 ## Future Work
 

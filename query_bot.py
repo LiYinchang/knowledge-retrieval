@@ -45,17 +45,33 @@ def get_user_model_choice():
     choice = input("Choose a language model: ")
     return choices.get(choice, 'gpt-4')
 
-def create_retriever_and_query_manager(embeddings, llms, model_choice):
+def get_index_choice():
+    """
+    Presents a menu to the user to choose an index if gpt-4 is selected.
+    Returns: A string representing the user's index choice.
+    """
+    choices = {
+        '1': 'index_repo',
+        '2': 'index_ui_wb',
+        '3': 'index_oai'
+    }
+    for key, value in choices.items():
+        print(f"{key}: {value}")
+    choice = input("Choose an index: ")
+    return choices.get(choice, 'index_repo')
+
+def create_retriever_and_query_manager(embeddings, llms, model_choice, index_choice):
     """
     Creates and returns a retriever and query manager based on the chosen model.
     """
-    indices = {
-        'gpt-4': 'index_oai',
-        'orca-mini': 'index_e5'
-    }
+    if model_choice == 'gpt-4':
+        index_choice = index_choice
+    else:
+        index_choice = 'index_e5'
+
     embedding = embeddings['openai'] if model_choice == 'gpt-4' else embeddings['e5_large_v2']
     llm = llms[model_choice]
-    retriever = Retriever(embedding, indices[model_choice], llm)
+    retriever = Retriever(embedding, index_choice, llm)
     selected_retriever = retriever.get_es_retriever()
     query_manager = QueryManager(llm, selected_retriever)
     return query_manager
@@ -66,14 +82,15 @@ def main():
 
     embeddings, llms = initialize_components(openai_api_key)
     model_choice = get_user_model_choice()
-    query_manager = create_retriever_and_query_manager(embeddings, llms, model_choice)
+    index_choice = get_index_choice()
+    query_manager = create_retriever_and_query_manager(embeddings, llms, model_choice, index_choice)
 
     while True:
         query = input("Enter your query (or type 'exit' to quit): ")
         if query.lower() == 'exit':
             break
         try:
-            response, source_documents = query_manager.get_response(query)
+            response = query_manager.get_response(query)
             print("Response:", response)
             print("--------------------")
         except Exception as e:
